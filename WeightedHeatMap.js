@@ -26,13 +26,15 @@ function WeightedHeatMap(data, map) {
 		- integer : the indice of the new HeatmapLayer in the this.heatmap array of HeatmapLayer
 		- boolean : false, if the association fail
 ***/
-WeightedHeatMap.prototype.showOnTheMap = function() {
+WeightedHeatMap.prototype.showOnTheMap = function(options) {
+	var options = options || null;
 	var toReturn = true;
 	try {
 		var heatmap = new google.maps.visualization.HeatmapLayer({
 			data: this.getTabWeightedLocation()
 		});
 		heatmap.setMap(this.map);
+		if (options != null) {heatmap.setOptions(options);}
 		this.heatmap.push(heatmap);
 		toReturn = this.heatmap.length - 1;	
 	}
